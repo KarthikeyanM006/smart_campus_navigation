@@ -344,8 +344,16 @@ class CampusLocationService extends ChangeNotifier {
 
   CampusRoom? getRoomByCode(String roomCode) {
     final clean = roomCode.trim().toUpperCase();
+    final cleanNum = clean.replaceAll(RegExp(r'[^0-9]'), '');
     try {
-      return _rooms.firstWhere((r) => r.roomCode.toUpperCase() == clean);
+      return _rooms.firstWhere(
+        (r) =>
+            r.roomCode.toUpperCase() == clean ||
+            r.roomCode.toUpperCase().replaceAll('ITP', '') == clean ||
+            (cleanNum.isNotEmpty &&
+                r.roomCode.toUpperCase().replaceAll('ITP', '') == cleanNum) ||
+            r.tags.any((t) => t.toUpperCase() == clean),
+      );
     } catch (_) {
       return null;
     }

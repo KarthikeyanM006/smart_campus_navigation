@@ -62,6 +62,7 @@ class _MapScreenState extends State<MapScreen> {
 
   @override
   void dispose() {
+    _locationService.stopLocationStream();
     _searchController.dispose();
     _mapController.dispose();
     super.dispose();
@@ -755,7 +756,6 @@ class _MapScreenState extends State<MapScreen> {
                       ),
                       const SizedBox(height: 12),
 
-                      // Action Buttons: View Details & Navigate
                       Row(
                         children: [
                           Expanded(
@@ -769,7 +769,21 @@ class _MapScreenState extends State<MapScreen> {
                               label: const Text('View Details'),
                             ),
                           ),
-                          const SizedBox(width: 10),
+                          if (selectedLocation.hasIndoorMap) ...[
+                            const SizedBox(width: 8),
+                            Expanded(
+                              child: OutlinedButton.icon(
+                                onPressed: () =>
+                                    _openFloorScreen(selectedLocation, 0),
+                                icon: const Icon(
+                                  Icons.layers_outlined,
+                                  size: 16,
+                                ),
+                                label: const Text('Floor Map'),
+                              ),
+                            ),
+                          ],
+                          const SizedBox(width: 8),
                           Expanded(
                             child: ElevatedButton.icon(
                               onPressed: () =>

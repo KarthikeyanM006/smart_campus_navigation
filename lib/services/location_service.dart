@@ -477,7 +477,9 @@ class LocationService extends ChangeNotifier {
 
   /// Stops listening to real-time GPS updates.
   void stopLocationStream() {
-    _positionStreamSub?.cancel();
+    try {
+      _positionStreamSub?.cancel();
+    } catch (_) {}
     _positionStreamSub = null;
   }
 

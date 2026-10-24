@@ -11,6 +11,7 @@ import '../services/indoor_navigation_service.dart';
 import '../widgets/floor_schematic_view.dart';
 import '../widgets/indoor_nav_schematic_view.dart';
 import '../widgets/location_detail_sheet.dart';
+import 'floor/it_park_floor_screen.dart';
 
 /// Indoor Navigation and Floor Layout Screen.
 /// Provides building floor switching, room/lab selection, floor plan viewing,
@@ -214,6 +215,22 @@ class _IndoorNavigationScreenState extends State<IndoorNavigationScreen> {
           ],
         ),
         actions: [
+          if (building.id == 'loc_it_park')
+            TextButton.icon(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => ITParkFloorScreen(
+                      building: building,
+                      initialFloorNumber: _selectedFloorNumber,
+                      initialSelectedRoomCodeOrId: _selectedRoom?.roomCode,
+                    ),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.map_outlined, size: 16),
+              label: const Text('2D Plan'),
+            ),
           if (_isNavigating)
             TextButton.icon(
               onPressed: () {

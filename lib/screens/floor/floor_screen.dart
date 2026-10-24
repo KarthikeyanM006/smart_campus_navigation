@@ -9,6 +9,7 @@ import '../../services/campus_location_service.dart';
 import '../../widgets/floor_schematic_view.dart';
 import '../../widgets/location_detail_sheet.dart';
 import '../navigation/indoor_navigation_screen.dart';
+import 'it_park_floor_screen.dart';
 
 /// Screen displaying the interactive indoor floor plan and room directory for a building.
 class FloorScreen extends StatefulWidget {
@@ -121,6 +122,15 @@ class _FloorScreenState extends State<FloorScreen> {
 
   @override
   Widget build(BuildContext context) {
+    if (widget.building.id == 'loc_it_park') {
+      return ITParkFloorScreen(
+        building: widget.building,
+        initialFloorNumber: _selectedFloorNumber,
+        initialSelectedRoomCodeOrId: _selectedRoomId,
+        onNavigateToBuilding: widget.onNavigateToBuilding,
+      );
+    }
+
     final floors = widget.building.floors;
     final currentFloor = _currentFloor;
     final selectedRoom =

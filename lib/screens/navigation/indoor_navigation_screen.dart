@@ -8,6 +8,7 @@ import '../../models/campus_room.dart';
 import '../../models/indoor_navigation.dart';
 import '../../services/indoor_navigation_service.dart';
 import '../../widgets/indoor_nav_schematic_view.dart';
+import '../floor/it_park_floor_screen.dart';
 
 /// Indoor turn-by-turn navigation screen showing schematic route, distance, duration, and step-by-step guidance.
 class IndoorNavigationScreen extends StatefulWidget {
@@ -126,6 +127,25 @@ class _IndoorNavigationScreenState extends State<IndoorNavigationScreen> {
             ),
           ],
         ),
+        actions: [
+          if (widget.building.id == 'loc_it_park')
+            TextButton.icon(
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute<void>(
+                    builder: (_) => ITParkFloorScreen(
+                      building: widget.building,
+                      initialFloorNumber: widget.destinationRoom.floor,
+                      initialSelectedRoomCodeOrId:
+                          widget.destinationRoom.roomCode,
+                    ),
+                  ),
+                );
+              },
+              icon: const Icon(Icons.map_outlined, size: 16),
+              label: const Text('2D Plan'),
+            ),
+        ],
       ),
       body: SafeArea(
         child: Column(

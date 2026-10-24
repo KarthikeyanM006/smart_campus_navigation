@@ -172,6 +172,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _showRoomDetails(BuildContext context, CampusRoom room) {
+    if (room.buildingId == 'loc_it_park') {
+      final building = _service.getLocationById(room.buildingId);
+      if (building != null) {
+        _openFloorScreen(building, room.floor, room.roomCode);
+        return;
+      }
+    }
     LocationDetailSheet.show(
       context,
       room: room,

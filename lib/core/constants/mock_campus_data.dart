@@ -1,4 +1,5 @@
 import '../../data/campus_locations.dart';
+import '../../data/it_park_layout_data.dart';
 import '../../models/campus_floor.dart';
 import '../../models/campus_location.dart';
 import '../../models/campus_room.dart';
@@ -457,17 +458,24 @@ class MockCampusData {
   static List<CampusLocation> get initialLocations =>
       List<CampusLocation>.from(CampusLocationData.campusBuildings);
 
-  static List<CampusRoom> get initialRooms => [
-    ...itpGroundRooms,
-    ...itpFloor1Rooms,
-    ...itpFloor2Rooms,
-    ...itpFloor3Rooms,
-    ...adminRooms,
-    ...shRooms,
-    ...eeeRooms,
-    ...eieRooms,
-    ...libRooms,
-    ...foodCourtRooms,
-    ...busStopRooms,
-  ];
+  static List<CampusRoom> get initialRooms {
+    final Map<String, CampusRoom> roomMap = {};
+    for (final room in [
+      ...itpGroundRooms,
+      ...itpFloor1Rooms,
+      ...itpFloor2Rooms,
+      ...itpFloor3Rooms,
+      ...ITParkLayoutData.allCampusRooms,
+      ...adminRooms,
+      ...shRooms,
+      ...eeeRooms,
+      ...eieRooms,
+      ...libRooms,
+      ...foodCourtRooms,
+      ...busStopRooms,
+    ]) {
+      roomMap[room.id] = room;
+    }
+    return roomMap.values.toList();
+  }
 }
