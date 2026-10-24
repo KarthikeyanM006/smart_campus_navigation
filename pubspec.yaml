@@ -1,5 +1,5 @@
 name: smart_campus_navigation
-description: "A new Flutter project."
+description: "Interactive indoor and outdoor smart campus navigation app built with Flutter, featuring vector 2D floor plans, turn-by-turn routing, and live GPS wayfinding."
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
